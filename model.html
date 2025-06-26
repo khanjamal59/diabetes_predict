@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .model-card {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2.5rem 2rem;
+    background: #ffffffcc;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 123, 255, 0.15);
+    backdrop-filter: blur(10px);
+    text-align: center;
+  }
+  .model-title {
+    color: #0d6efd;
+    font-weight: 700;
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+  }
+  .model-info {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  .model-image {
+    margin-top: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(13, 110, 253, 0.3);
+    max-height: 420px;
+    object-fit: contain;
+    width: 100%;
+  }
+</style>
+
+<div class="model-card">
+  <h2 class="model-title">⚙️ Model Information</h2>
+  <p class="model-info"><strong>Model:</strong> Support Vector Machine (SVM) - Linear Kernel</p>
+  <p class="model-info"><strong>Accuracy:</strong> {{ accuracy }}%</p>
+  <img 
+    src="{{ url_for('static', filename='plots/importance.png') }}" 
+    alt="Feature Importance" 
+    class="model-image"
+  >
+</div>
+{% endblock %}

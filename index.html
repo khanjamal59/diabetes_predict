@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+  <div class="card shadow-lg p-4 rounded-4" style="max-width: 900px; margin: auto;">
+    <h2 class="mb-4 text-center fw-bold text-primary">🩺 Diabetes Prediction</h2>
+    <form method="post" action="/predict" novalidate>
+      <div class="row g-4">
+        {% for label, name in [('Pregnancies', 'preg'), ('Glucose', 'glu'), ('Blood Pressure', 'bp'), ('Skin Thickness', 'skin'),
+                               ('Insulin', 'insulin'), ('BMI', 'bmi'), ('Pedigree Function', 'dpf'), ('Age', 'age')] %}
+        <div class="col-md-6 col-lg-3">
+          <div class="form-floating">
+            <input 
+              type="number" 
+              step="0.01" 
+              name="{{ name }}" 
+              class="form-control" 
+              id="input{{ loop.index }}" 
+              placeholder="{{ label }}" 
+              required>
+            <label for="input{{ loop.index }}">{{ label }}</label>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-gradient btn-lg fw-bold">
+          🔍 Predict
+        </button>
+      </div>
+    </form>
+
+    {% if result %}
+    <hr class="my-4">
+    <div class="alert alert-info text-center fs-5">
+      <strong>Prediction:</strong> {{ result }}
+      {% if confidence %}
+      <br>
+      Confidence: <strong>{{ confidence }}%</strong>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .btn-gradient {
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    color: white;
+    border: none;
+    transition: background 0.3s ease;
+  }
+  .btn-gradient:hover, .btn-gradient:focus {
+    background: linear-gradient(45deg, #0056b3, #00a1cc);
+    color: white;
+  }
+</style>
+{% endblock %}
